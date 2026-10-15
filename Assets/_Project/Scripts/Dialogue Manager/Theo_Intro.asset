@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0566c1c14859844878353d2cf97929, type: 3}
+  m_Name: Theo_Intro
+  m_EditorClassIdentifier: 
+  lines:
+  - speaker: Eve
+    text: "Whoa, finally! A living creature\u2014"
+    textID: 
+  - speaker: Eve
+    text: "Erm... I mean, welcome to FINCH\u2019s!"
+    textID: 
+  - speaker: Stranger
+    text: "Wait, FINCH\u2019s is open again? It\u2019s been ages since I last came
+      here."
+    textID: 
+  - speaker: Stranger
+    text: I heard this place went bankrupt. What happened?
+    textID: 
+  - speaker: Eve
+    text: Well, the old man who owns this place basically said the same thing.
+    textID: 
+  - speaker: Stranger
+    text: "So, you\u2019re the new barista? You\u2019re new around here too, aren\u2019t
+      you?"
+    textID: 
+  - speaker: Eve
+    text: "(Wow. What a detective. What\u2019s it to you?)"
+    textID: 
+  - speaker: Stranger
+    text: Hahaha! Sorry. You just look like someone from the city.
+    textID: 
+  - speaker: Stranger
+    text: "I\u2019m not from around here either. I tried applying for jobs in the
+      city, but... total failure."
+    textID: 
+  - speaker: Stranger
+    text: "Figured I\u2019d come back for a while. I don\u2019t even know what I\u2019m
+      supposed to do next."
+    textID: 
+  - speaker: Eve
+    text: "(Honestly, I get it. Finding a job in the city is a nightmare. That\u2019s
+      why I ended up here, too.)"
+    textID: 

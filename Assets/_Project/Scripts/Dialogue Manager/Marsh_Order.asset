@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0566c1c14859844878353d2cf97929, type: 3}
+  m_Name: Marsh_Order
+  m_EditorClassIdentifier: 
+  lines:
+  - speaker: Eve
+    text: So.... what do you want to drink?
+    textID: 
+  - speaker: Mrs. Marsh
+    text: Thank you, dear. Could I get a milk coffee, please?
+    textID: 
+  - speaker: Eve
+    text: Sure, one Milk Coffee
+    textID: 
+  - speaker: Mrs. Marsh
+    text: ..........
+    textID: 
+  - speaker: Mrs. Marsh
+    text: You know, I wish things were going this smoothly at my workplace.
+    textID: 
+  - speaker: Eve
+    text: Oh, where do you work?
+    textID: 
+  - speaker: Mrs. Marsh
+    text: "I\u2019m a teacher at the local school. Willowmere Elementary School"
+    textID: 
+  - speaker: Mrs. Marsh
+    text: "But we\u2019re losing students every year. Fewer children, fewer classes."
+    textID: 
+  - speaker: Mrs. Marsh
+    text: If it keeps up, the school might be shut down for good.
+    textID: 
+  - speaker: Eve
+    text: "Well.. that's pretty sucks, but they\u2019d really close a whole school
+      over that?"
+    textID: 
+  - speaker: Mrs. Marsh
+    text: "I\u2019m afraid so. A school can\u2019t run without children to teach."
+    textID: 
+  - speaker: Eve
+    text: "I\u2019m sorry to hear that."
+    textID: 
+  - speaker: Mrs. Marsh
+    text: "It\u2019s alright, dear. I just hope things will get better."
+    textID: 

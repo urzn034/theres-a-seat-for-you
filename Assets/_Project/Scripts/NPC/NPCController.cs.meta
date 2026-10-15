@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c7fd674d5b2eaf44c833086f62474cb0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - anim: {instanceID: 0}
+  - idleSprite: {fileID: 21300000, guid: 41e524342101c024ea3f39b203ce8ae7, type: 3}
+  - sitSprite: {fileID: 21300000, guid: a3efe526d6e1f824592d159f87579318, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

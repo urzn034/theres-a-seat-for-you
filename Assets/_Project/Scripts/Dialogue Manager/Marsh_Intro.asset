@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0566c1c14859844878353d2cf97929, type: 3}
+  m_Name: Marsh_Intro
+  m_EditorClassIdentifier: 
+  lines:
+  - speaker: Mrs. Marsh
+    text: "Oh, how wonderful! After seeing this place empty for months, I was beginning
+      to wonder if it would ever open again. I\u2019m glad to see it back in business!"
+    textID: 
+  - speaker: Eve
+    text: "Ahaha... yeah, we\u2019re open again!"
+    textID: 
+  - speaker: Mrs. Marsh
+    text: "It\u2019s been quite some time. I used to stop by here every now and then."
+    textID: 
