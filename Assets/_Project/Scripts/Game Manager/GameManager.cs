@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     private float nextSpawnInterval = 6f;
     private bool isDayStarted = false;
     private bool isDayFinished = false;
+    private int servedCount, perfectCount, lostCount, dayEarnings;
 
     private List<ActiveOrder> activeOrders = new List<ActiveOrder>();
     private Canvas worldCanvas;
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Image fadeImage;
     [SerializeField] private TMP_FontAsset orderFont;
+    public TMP_FontAsset OrderFont => orderFont;
     [SerializeField] private GameObject fridgeStation;
     [SerializeField] private Transform eveSpawnPoint;
 
@@ -83,6 +85,10 @@ public class GameManager : MonoBehaviour
     {
         if (endBanner == null) yield break;
         endBanner.text = text;
+        endBanner.enableAutoSizing = true;
+        endBanner.fontSizeMin = 20;
+        endBanner.fontSizeMax = 48;
+        endBanner.enableWordWrapping = false;
         Color c = endBanner.color;
         for (float t = 0f; t < 1f; t += Time.deltaTime) { c.a = t; endBanner.color = c; yield return null; }
         c.a = 1f; endBanner.color = c;
@@ -117,6 +123,9 @@ public class GameManager : MonoBehaviour
                 Color ec = endBanner.color; ec.a = 1f; endBanner.color = ec;
             }
             yield return new WaitForSeconds(4f);
+            MainMenu.hasSession = false;
+            MainMenu.savedDay = 0;
+            MainMenu.savedMoney = 0;
             SceneManager.LoadScene("MainMenu");
             yield break;
         }
@@ -136,6 +145,7 @@ public class GameManager : MonoBehaviour
         currentDay++;
         UpdateFridgeLock();
         spawnedOrdersCount = 0;
+        servedCount = 0; perfectCount = 0; lostCount = 0; dayEarnings = 0;
         spawnTimer = 0f;
         nextSpawnInterval = 6f;
         isDayStarted = false;
@@ -183,8 +193,21 @@ public class GameManager : MonoBehaviour
             missionText.text = trashLeft > 0 ? "Bersihkan sampah (" + (trashTotal - trashLeft) + "/" + trashTotal + ")" : "Bersihkan sampah (" + trashTotal + "/" + trashTotal + ") - selesai!";
     }
 
+    public void SaveSession()
+    {
+        MainMenu.hasSession = true;
+        MainMenu.sessionScene = SceneManager.GetActiveScene().name;
+        MainMenu.savedDay = currentDay;
+        MainMenu.savedMoney = playerMoney;
+    }
+
     private void Start()
     {
+        if (MainMenu.hasSession && MainMenu.savedDay > 0)
+        {
+            currentDay = MainMenu.savedDay;
+            playerMoney = MainMenu.savedMoney;
+        }
         dialogueMgr = FindObjectOfType<DialogueManager>();
         SetupWorldCanvas();
         UpdateFridgeLock();
@@ -199,7 +222,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("[NARASI Day " + currentDay + "]: " + currentDayData.openingNarration);
         }
 
-        if (currentDay == 1 && introInside != null && dialogueMgr != null)
+        if (currentDay == 1 && !MainMenu.hasSession && introInside != null && dialogueMgr != null)
         {
             if (missionText != null) missionText.gameObject.SetActive(false);
 
@@ -213,7 +236,7 @@ public class GameManager : MonoBehaviour
             yield return Fade(1f, 0f, 1f);
         }
 
-        if (currentDay > 1 && finchIntro != null) finchIntro.SetActive(false);
+        if ((currentDay > 1 || MainMenu.hasSession) && finchIntro != null) finchIntro.SetActive(false);
 
         yield return ShowBanner("DAY " + currentDay);
 
@@ -250,7 +273,7 @@ public class GameManager : MonoBehaviour
         {
             isDayFinished = true;
             SetMission("Hari selesai! Total: $" + playerMoney);
-            StartCoroutine(ShowEndBanner("DAY " + currentDay + " COMPLETE\n$" + playerMoney));
+            StartCoroutine(ShowEndBanner("DAY " + currentDay + " COMPLETE\nServed: " + servedCount + "   Perfect: " + perfectCount + "   Left: " + lostCount + "\nEarned today: $" + dayEarnings + "\nTotal: $" + playerMoney));
             StartCoroutine(GoNextDay());
             Debug.Log("DAY " + currentDay + " SELESAI! Total Uang: $" + playerMoney);
 
@@ -437,10 +460,28 @@ public class GameManager : MonoBehaviour
         int earnings = recipe.price;
         if (npcCtrl.gotPerfect) earnings += Mathf.CeilToInt(recipe.price * 0.5f);
         playerMoney += earnings;
+        servedCount++;
+        dayEarnings += earnings;
+        if (npcCtrl.gotPerfect) perfectCount++;
         Debug.Log("Pembayaran otomatis diterima! Uang bertambah +$" + earnings + ". Total Saldo: $" + playerMoney);
         
     }
 
+    public void CancelOrderFor(NPCController npc)
+    {
+        for (int i = 0; i < activeOrders.Count; i++)
+        {
+            if (activeOrders[i].npcController == npc)
+            {
+                Destroy(activeOrders[i].uiElement);
+                activeOrders.RemoveAt(i);
+                break;
+            }
+        }
+        lostCount++;
+        RelayoutOrders();
+        SetMission(npc.CustomerName + " pergi karena kelamaan menunggu");
+    }
     private void RelayoutOrders()
     {
         for (int i = 0; i < activeOrders.Count; i++)

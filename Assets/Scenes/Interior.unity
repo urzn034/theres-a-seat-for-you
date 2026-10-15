@@ -474,7 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5528,6 +5528,7 @@ MonoBehaviour:
   patienceDuration: 45
   barOffset: {x: 0, y: 2.2, z: 0}
   barSize: {x: 1.2, y: 0.15}
+  talkOffset: {x: 0, y: 2.4, z: 0}
   exitPoint: {fileID: 1273455835}
   leaveWaypoint: {fileID: 816102737}
   walkFps: 6
@@ -5670,8 +5671,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 379b9f37a803eba4b94f6e1502be2516, type: 2}
+  m_sharedMaterial: {fileID: 6417220558302637573, guid: 379b9f37a803eba4b94f6e1502be2516, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7345,7 +7346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5877ec5445bedeb4fa0a666a82a9640e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: Serahkan Minuman ke Pelanggan
+  promptMessage: Layani Pelanggan
 --- !u!212 &1888553357
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8125,6 +8126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1984477979}
   - component: {fileID: 1984477978}
+  - component: {fileID: 1984477980}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8232,6 +8234,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1984477980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984477977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20f504d032756247a7b2564d144afce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  font: {fileID: 11400000, guid: 379b9f37a803eba4b94f6e1502be2516, type: 2}
+  menuScene: MainMenu
 --- !u!1 &2019274501
 GameObject:
   m_ObjectHideFlags: 0

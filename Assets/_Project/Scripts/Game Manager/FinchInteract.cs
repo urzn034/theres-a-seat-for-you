@@ -14,6 +14,6 @@ public class FinchInteract : MonoBehaviour, IInteractable
     {
         if (played || dialogue == null || dialogue.IsRunning || outside2 == null) return;
         played = true;
-        dialogue.StartDialogue(outside2.lines);
+        dialogue.StartDialogue(outside2.lines, () => DoorController.unlocked = true);
     }
 }

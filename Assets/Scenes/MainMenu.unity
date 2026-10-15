@@ -3886,6 +3886,11 @@ MonoBehaviour:
   duration: 5
   menuUI: {fileID: 598856170}
   nextScene: Intro
+  titleFont: {fileID: 11400000, guid: 379b9f37a803eba4b94f6e1502be2516, type: 2}
+  chapterLabel: CHAPTER 1
+  chapterTitle: A Town Named Willowmere
+  titleFadeTime: 0.8
+  titleHoldTime: 2
 --- !u!1 &1894164509
 GameObject:
   m_ObjectHideFlags: 0

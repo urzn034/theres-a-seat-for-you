@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour
@@ -26,6 +27,9 @@ public class NPCController : MonoBehaviour
     private float patience;
     private Transform barRoot, barFill;
     private static Sprite whiteSprite;
+    private TextMeshPro talkMark;
+    [SerializeField] private Vector3 talkOffset = new Vector3(0f, 3f, 0f);
+    public static TMP_FontAsset talkFont;
     public Transform exitPoint;
 
     public Transform leaveWaypoint;
@@ -124,7 +128,13 @@ public class NPCController : MonoBehaviour
 
             case NPCState.SittingWaitingForCoffee:
                 patience -= Time.deltaTime;
-                if (patience <= 0f) { patience = 0f; Debug.Log(customerName + " kehabisan sabar!"); }
+                if (patience <= 0f)
+                {
+                    patience = 0f;
+                    Debug.Log(customerName + " kehabisan sabar!");
+                    currentState = NPCState.Leaving;
+                    gameManager.CancelOrderFor(this);
+                }
                 break;
 
             case NPCState.EnjoyingDrink:
@@ -135,6 +145,7 @@ public class NPCController : MonoBehaviour
                     gameManager.CompletePaymentAndLeave(this, assignedRecipe);
                 }
                 break;
+
 
             case NPCState.Leaving:
                 if (doorPoint == null)
@@ -174,6 +185,7 @@ public class NPCController : MonoBehaviour
     private void LateUpdate()
     {
         UpdateBar();
+        UpdateTalkMark();
         if (sr == null) return;
 
         bool sitting = currentState == NPCState.SittingWaitingForCoffee || currentState == NPCState.EnjoyingDrink;
@@ -205,6 +217,8 @@ public class NPCController : MonoBehaviour
         {
             if (idleSprite != null) sr.sprite = idleSprite;
         }
+
+
     }
 
     public void InteractWithCustomer()
@@ -321,5 +335,33 @@ public class NPCController : MonoBehaviour
         barRoot.position = transform.position + barOffset;
         barFill.localScale = new Vector3(barSize.x * r, barSize.y, 1f);
         barFill.GetComponent<SpriteRenderer>().color = r > 0.5f ? new Color(0.45f, 0.8f, 0.4f) : r > 0.25f ? new Color(0.95f, 0.8f, 0.3f) : new Color(0.9f, 0.3f, 0.3f);
+    }
+
+    private void UpdateTalkMark()
+    {
+        bool show = currentState == NPCState.WaitingForInteraction;
+        if (show && talkMark == null)
+        {
+            var o = new GameObject("TalkMark");
+            o.transform.SetParent(transform, false);
+            talkMark = o.AddComponent<TextMeshPro>();
+            talkMark.text = "! E";
+            talkMark.fontSize = 14f;
+            talkMark.alignment = TextAlignmentOptions.Center;
+            talkMark.color = new Color(1f, 0.92f, 0.45f);
+            talkMark.enableWordWrapping = false;
+            talkMark.sortingOrder = 120;
+            if (talkFont == null)
+            {
+                var gm = FindObjectOfType<DialogueManager>();
+                var anyText = gm != null ? gm.GetComponentInChildren<TMP_Text>(true) : null;
+                if (anyText != null) talkFont = anyText.font;
+            }
+            if (talkFont == null && gameManager != null) talkFont = gameManager.OrderFont;
+            if (talkFont != null) talkMark.font = talkFont;
+        }
+        if (talkMark == null) return;
+        talkMark.gameObject.SetActive(show);
+        if (show) talkMark.transform.localPosition = talkOffset;
     }
 }
