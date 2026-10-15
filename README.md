@@ -8,7 +8,7 @@ Made for the LPPC Gunadarma lab assistant selection.
 
 ## Synopsis
 
-Eve is a former graffiti artist with sage-colored hair who now works the counter at Finch's Cafe, owned by Mr. Barnaby Finch. Every day, the villagers of Willowmere drop by, each carrying a story along with their order. Eve listens, brews, and serves, and slowly the cafe becomes a place where everyone has a seat.
+Eve is a former graffiti artist with sage-colored hair who now works the counter at Finch's Cafe, owned by Mr. Finch. Every day, the villagers of Willowmere drop by, each carrying a story along with their order. Eve listens, brews, and serves, and slowly the cafe becomes a place where everyone has a seat.
 
 In this demo:
 - **Day 1:** Theo Baker orders a Black Coffee.
